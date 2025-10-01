@@ -1,32 +1,36 @@
 import { useState } from "react";
+import { useRouter } from "next/router";  // 🔹 Import Next.js router
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const router = useRouter();  // 🔹 Initialize router
 
-  // 🔹 Define handleSubmit so it’s not undefined
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = {};
 
     if (!email) {
-      newErrors.email = "Email is required";
+      newErrors.email = "Dholiest3105@gmail";
     }
     if (!password) {
-      newErrors.password = "Password is required";
+      newErrors.password = "12345678";
     }
 
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       console.log("Logging in with:", { email, password });
-    //   Later: replace this with your login API call
+
+      // 🔹 Simple redirect after "successful login"
+      router.push("/landingpage");  
+    
     }
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-100">
+    <main className="flex min-h-screen items-center justify-center bg-purple-900">
       <div className="w-full max-w-md bg-black rounded-lg shadow-md p-8">
         <h1 className="text-2xl font-bold text-center mb-6">Login to BlockVerify</h1>
         <form className="space-y-4" onSubmit={handleSubmit} noValidate>
